@@ -1,6 +1,7 @@
 module E09_ProjectEuler where
 
 import Common
+import Data.Char (digitToInt)
 
 {-
     Some exercises from Project Euler - https://projecteuler.net
@@ -16,7 +17,7 @@ import Common
     A simple solution to this involves sum, filter and mod.
 -}
 
-problem1 = _YOUR_CODE_HERE
+problem1 = sum $ filter (\x -> (mod x 3 == 0) || (mod x 5 == 0)) [1..999]
 
 {-
     Problem 4
@@ -35,7 +36,7 @@ problem1 = _YOUR_CODE_HERE
           [x+y | x <- [1,2], y <- [8,9], (x+y) `mod` 2 == 0] = [1+9, 2+8]
 
 -}
-problem4 = _YOUR_CODE_HERE
+problem4 = maximum [x*y | x<-[100..999], y<-[100..999], show (x*y) == (reverse . show) (x*y)]
 
 {-
     Problem 6
@@ -52,7 +53,11 @@ problem4 = _YOUR_CODE_HERE
     Find the difference between the sum of the squares of the first one hundred
     natural numbers and the square of the sum.
 -}
-problem6 = _YOUR_CODE_HERE
+problem6 :: Int
+problem6 = let lst = [1..100]
+               sumsq = sum (map (^2) lst)
+               sqsum = (sum lst)^2
+           in sqsum - sumsq
 
 {-
     Problem 16
@@ -61,4 +66,5 @@ problem6 = _YOUR_CODE_HERE
 
     What is the sum of the digits of the number 2^1000?
 -}
-problem16 = _YOUR_CODE_HERE
+problem16 :: Int
+problem16 = sum $ map (digitToInt) (show (2^1000))

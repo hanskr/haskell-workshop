@@ -1,6 +1,7 @@
 module E10_QuickCheckExamples where
 
 import Common
+import Data.List
 
 {-
     QuickCheck can be used for property-based testing.
@@ -31,7 +32,7 @@ reverseProperty' xs = xs == (reverse . reverse) xs
     [(1,'H'),(4,'e'),(2,'l'),(1,'o'),(1,' '),(1,'H'),(1,'a'),(1,'s'),(1,'k'),(1,'e'),(2,'l'),(3,'!')]
 -}
 encode :: String -> [(Int, Char)]
-encode xs = _YOUR_CODE_HERE
+encode xs = map (\e -> (length e, head e)) (group xs)
 
 {-
     Excercise 2:
@@ -44,4 +45,4 @@ encode xs = _YOUR_CODE_HERE
 -}
 
 decode :: [(Int, Char)] -> String
-decode xs = _YOUR_CODE_HERE
+decode xs = concat $ map (\(n, e) -> replicate n e) xs

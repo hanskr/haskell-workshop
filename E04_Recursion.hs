@@ -39,9 +39,9 @@ returnLastElementPartial xs = returnLastElementPartial (tail xs)
 -}
 
 returnLastElement :: [a] -> Maybe a
-returnLastElement []  = _YOUR_CODE_HERE
-returnLastElement [x] = _YOUR_CODE_HERE
-returnLastElement xs  = _YOUR_CODE_HERE
+returnLastElement []  = Nothing
+returnLastElement [x] = Just x
+returnLastElement xs  = returnLastElement (tail xs)
 
 
 {-
@@ -51,7 +51,10 @@ returnLastElement xs  = _YOUR_CODE_HERE
     add more function clauses as you see fit.
 -}
 secondToLast :: [a] -> Maybe a
-secondToLast _ = _YOUR_CODE_HERE
+secondToLast [] = Nothing
+secondToLast [x] = Nothing
+secondToLast [x, y] = Just x
+secondToLast xs = secondToLast (tail xs)
 
 {-
     Exercise:
@@ -59,7 +62,7 @@ secondToLast _ = _YOUR_CODE_HERE
     Of course, you shouldn't use the pre-defined length function ;)
 -}
 listLength :: [Int] -> Int
-listLength list = _YOUR_CODE_HERE
+listLength list = 1 + listLength (tail list)
 
 {-
     While explicit recursion sure works, we can often use generic “recursion

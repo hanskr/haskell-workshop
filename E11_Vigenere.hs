@@ -40,19 +40,21 @@ alphabet :: [Char]
 alphabet = ['A'..'Z']
 
 char2int :: Char -> Int
-char2int c = _YOUR_CODE_HERE
+char2int c = fromJust $ elemIndex c alphabet
 
 int2char :: Int -> Char
-int2char i = _YOUR_CODE_HERE
+int2char i = alphabet!!i
 
 encryptChar :: (Char, Char) -> Char
-encryptChar (plainChar, keyChar) = _YOUR_CODE_HERE
+encryptChar (plainChar, keyChar) = int2char $ mod (char2int plainChar + char2int keyChar) 26
 
 decryptChar :: (Char, Char) -> Char
-decryptChar (encryptedChar, keyChar) = _YOUR_CODE_HERE
+decryptChar (encryptedChar, keyChar) = int2char $ mod (char2int encryptedChar - char2int keyChar) 26
 
 encrypt :: String -> String -> String
-encrypt plainText secretKey = _YOUR_CODE_HERE
+encrypt plainText secretKey = let key = (concat . repeat) secretKey
+                              in zipWith (\x y -> encryptChar (x,y))  plainText key
 
 decrypt :: String -> String -> String
-decrypt encryptedText secretKey = _YOUR_CODE_HERE
+decrypt encryptedText secretKey = let key = (concat . repeat) secretKey
+                                  in zipWith (\x y -> decryptChar (x,y))  encryptedText key
